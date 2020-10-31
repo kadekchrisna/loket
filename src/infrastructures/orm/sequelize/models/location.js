@@ -1,20 +1,12 @@
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('location', {
+  const location =  sequelize.define('location', {
     id_location: {
-      type: DataTypes.INTEGER(11),
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV1,
       allowNull: false,
-      primaryKey: true,
-      autoIncrement: true
-    },
-    id_event: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      references: {
-        model: 'event',
-        key: 'id_event'
-      }
+      primaryKey: true
     },
     name: {
       type: DataTypes.STRING(100),
@@ -36,6 +28,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(100),
       allowNull: false
     },
+    zip: {
+      type: DataTypes.STRING(10),
+      allowNull: false
+    },
     latitude: {
       type: DataTypes.STRING(20),
       allowNull: false
@@ -55,6 +51,13 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     tableName: 'location',
-    timestamps: false,
+    timestamps: false
   });
+  location.associate = function (models) {
+    location.hasMany(models.event, {
+      foreignKey: "id_location",
+      sourceKey: "id_location",
+    })
+  }
+  return location
 };
