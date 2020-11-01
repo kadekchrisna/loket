@@ -10,7 +10,7 @@ const transUseCase = require("../../../applications/usecase/transaction")
 
 const transController = require("../../controllers/transaction")
 
-const TransUseCase = new transUseCase(new transRepo(db.transaction, db.order, db.ticket, db.event), new orderRepo(db.order), new customerRepo(db.customer), new ticketRepo(db.ticket), db.sequelize)
+const TransUseCase = new transUseCase(new transRepo(db.transaction, db.order, db.ticket, db.event, db.location), new orderRepo(db.order), new customerRepo(db.customer), new ticketRepo(db.ticket), db.sequelize)
 
 r.get("/transaction/get_info/:id", transController(TransUseCase).getTransaction)
 r.post("/transaction/purchase", transController(TransUseCase).createTransaction)

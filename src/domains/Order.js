@@ -1,10 +1,11 @@
 class Order {
-    constructor({id_order, id_transaction, id_ticket, order_amount, order_qty, created_at, updated_at}) {
+    constructor({id_order, id_transaction, id_ticket, order_amount, order_qty, created_at, updated_at, ticket}) {
         this.id_order = id_order
         this.id_transaction = id_transaction
         this.id_ticket = id_ticket
         this.order_amount = order_amount
         this.order_qty = order_qty
+        this.ticket = ticket
         this.created_at = !created_at ? undefined : MOMENT(created_at).format('YYYY-MM-DD HH:mm:ss')
         this.updated_at = !updated_at ? undefined : MOMENT(updated_at).format('YYYY-MM-DD HH:mm:ss')
     }

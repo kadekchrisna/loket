@@ -1,6 +1,9 @@
 
 const TransUseCase = require('../../domains/Transaction').TransactionUseCase;
 const Order = require("../../domains/Order").Order
+const Ticket = require("../../domains/Ticket").Ticket
+const Event = require("../../domains/Event").Event
+const Location = require("../../domains/Location").Location
 const Transaction = require("../../domains/Transaction").Transaction
 
 module.exports = class extends TransUseCase {
@@ -136,9 +139,9 @@ module.exports = class extends TransUseCase {
     }
     async getTransaction(id) {
         try {
-            const transaction = new Transaction({id_transaction: id})
+            let transaction = new Transaction({id_transaction: id})
             const validation = transaction.ValidateID()
-
+            const orders = []
             if (!validation.check) {
                 const response = MISC.responses({
                     status: 400,
@@ -154,10 +157,23 @@ module.exports = class extends TransUseCase {
                 })
                 return response
             }
+            transaction = new Transaction(result)
+            if (result.orders.length > 0) {
+                for (const order of result.orders) {
+                    const loc = new Location(order.ticket.event.location)
+                    const event = new Event({...order.ticket.event.dataValues, ...{location: loc}})
+                    const ticket = new Ticket({id_ticket:order.ticket.id_ticket, id_event:order.ticket.id_event, name: order.ticket.name, desc: order.ticket.desc, event: event})
+                    const orderTr = new Order({...order.dataValues, ...{ticket: ticket}})
+                    console.log({...order, ...{ticket: ticket}});
+                    orders.push(orderTr)
+                }
+                transaction.orders = orders
+            }
+
             const response = MISC.responses({
                 status: 200,
                 message: "success"
-            }, result)
+            }, transaction)
             return response
         } catch (error) {
             console.log(error);

@@ -1,12 +1,13 @@
 const TransaRepo = require("../../domains/Transaction").TransactionRepository
 
 module.exports = class extends TransaRepo {
-    constructor(trans, order, ticket, event) {
+    constructor(trans, order, ticket, event, location) {
         super();
         this.trans = trans
         this.order = order
         this.ticket = ticket
         this.event = event
+        this.location = location
     }
 
     async createTransaction(body, t) {
@@ -25,7 +26,10 @@ module.exports = class extends TransaRepo {
                 include: {
                     model: this.ticket,
                     include: {
-                        model: this.event
+                        model: this.event,
+                        include: {
+                            model: this.location
+                        }
                     }
                 }
             }

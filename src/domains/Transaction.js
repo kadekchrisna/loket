@@ -1,9 +1,10 @@
 class Transaction {
-    constructor({id_transaction, id_customer, invoice_number, invoice_amount, created_at, updated_at}) {
+    constructor({id_transaction, id_customer, invoice_number, invoice_amount, created_at, updated_at, orders}) {
         this.id_transaction = id_transaction
         this.id_customer = id_customer
         this.invoice_number = invoice_number
         this.invoice_amount = invoice_amount
+        this.orders = orders
         this.created_at = !created_at ? undefined : MOMENT(created_at).format('YYYY-MM-DD HH:mm:ss')
         this.updated_at = !updated_at ? undefined : MOMENT(updated_at).format('YYYY-MM-DD HH:mm:ss')
     }

@@ -29,7 +29,7 @@ app.use((req, res, next) => {
         .catch(e => {
             return MISC.responses(res, {
                 status: 500,
-                message: "database connection not established."
+                message: `database connection not established. ${e}`
             })
         });
 });

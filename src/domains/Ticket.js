@@ -1,11 +1,12 @@
 class Ticket {
-    constructor({id_ticket,id_event, name, desc, stock, price, created_at, updated_at}) {
+    constructor({id_ticket,id_event, name, desc, stock, price, created_at, updated_at, event}) {
         this.id_ticket = id_ticket
         this.id_event = id_event
         this.name = name
         this.desc = desc
         this.stock = stock
         this.price = price
+        this.event = event
         this.created_at = !created_at ? undefined : MOMENT(created_at).format('YYYY-MM-DD HH:mm:ss')
         this.updated_at = !updated_at ? undefined : MOMENT(updated_at).format('YYYY-MM-DD HH:mm:ss')
     }
