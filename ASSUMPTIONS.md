@@ -2,7 +2,7 @@
 
 ## Tools I Have Used
 
-### [Sequelize](https://sequelize.org/master/index.html)
+### [Sequelize](https://sequelize.org/master/index.html) - ORM
 
 For Database pooling connection and easier data access to object type return from query.
 
