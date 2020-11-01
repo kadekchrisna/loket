@@ -48,25 +48,6 @@ How to run the server
 npm start
 ```
 
-### Project anatomy
-
-```
-src
- └ application                      → Application services layer
-       └ use_cases                  → Application business rules
-  └ domain                          → Enterprise core business layer such as domain model objects and repository interfaces
-  └ infrastructure                  → Frameworks, drivers and tools such as Database, the Web Framework, mailing/logging/glue code etc.
-       └ config                     → Application configuration files, modules and services
-       └ orm                        → Database ORMs middleware (Sequelize for SQLite3 or PostgreSQL, Mongoose for MongoDB)
-          └ sequelize               → Sequelize client and models
-       └ repositories               → Implementation of domain repository interfaces
-   └ interfaces                     → Adapters and formatters for use cases and entities to external agency such as Database or the Web
-       └ controllers                → route handlers
-       └ routes                     → route definitions
- └ node_modules (generated)         → NPM dependencies
- └ index.js                         → Main application entry point
-```
-
 ## Postman Collection
 
 Here's lists [API Collection](https://www.getpostman.com/collections/c615eaf10fe47d9f2235).
